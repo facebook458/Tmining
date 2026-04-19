@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tcoin</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="authBox" class="center">
+  <h2>Welcome</h2>
+  <input id="email" placeholder="Email">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+<header class="header">
+  <h2>Earning App</h2>
+  <div>Balance: <span id="bal">0</span></div>
+</header>
+
+<nav class="nav">
+  <button onclick="load('video')">🎥 Video</button>
+  <button onclick="load('ads')">📢 Ads</button>
+  <button onclick="load('web')">🌐 Web</button>
+  <button onclick="load('channel')">📺 Channel</button>
+  <button onclick="dashboard()">📊 Dashboard</button>
+</nav>
+
+<div id="bannerAds"></div>
+
+<div id="content" class="grid"></div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+<script src="firebase.js"></script>
+<script src="ads.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
