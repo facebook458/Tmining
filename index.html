@@ -1,72 +1,142 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Tcoin</title>
-<link rel="stylesheet" href="style.css">
+<title>Tcoin App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+ margin:0;
+ font-family:sans-serif;
+ background:linear-gradient(to right,#4facfe,#00f2fe);
+ color:white;
+}
+
+.box{
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ height:100vh;
+}
+
+input{
+ margin:5px;
+ padding:10px;
+ width:80%;
+ border:none;
+ border-radius:5px;
+}
+
+button{
+ background:green;
+ color:white;
+ border:none;
+ padding:10px;
+ width:85%;
+ margin:5px;
+ border-radius:5px;
+}
+
+.hidden{display:none;}
+
+.header{
+ text-align:center;
+ padding:10px;
+}
+</style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="authBox" class="center">
-  <h2>Welcome</h2>
-  <input id="email" placeholder="Email">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <button onclick="register()">Register</button>
+<div id="auth" class="box">
+ <h2>🔥 Tcoin Login</h2>
+
+ <input id="email" placeholder="Email">
+ <input id="pass" type="password" placeholder="Password">
+
+ <button onclick="login()">Login</button>
+ <button onclick="register()">Register</button>
 </div>
 
-<!-- APP -->
-<div id="app" style="display:none">
+<div id="app" class="hidden">
 
-<header class="header">
-  <h2>Earning App</h2>
-  <div>Balance: <span id="bal">0</span></div>
-</header>
+ <div class="header">
+  <h2>Dashboard</h2>
+  <h3>Balance: <span id="bal">0</span></h3>
+ </div>
 
-<nav class="nav">
-  <button onclick="load('video')">🎥 Video</button>
-  <button onclick="load('ads')">📢 Ads</button>
-  <button onclick="load('web')">🌐 Web</button>
-  <button onclick="load('channel')">📺 Channel</button>
-  <button onclick="dashboard()">📊 Dashboard</button>
-</nav>
-
-<div id="bannerAds"></div>
-
-<div id="content" class="grid"></div>
+ <button onclick="loadBalance()">Refresh</button>
 
 </div>
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+<script>
 const firebaseConfig = {
   apiKey: "AIzaSyAwEJXhlSz_2PPORwQcsqcOGTmZuUC4UZ8",
   authDomain: "tcoin-3d985.firebaseapp.com",
   databaseURL: "https://tcoin-3d985-default-rtdb.firebaseio.com",
   projectId: "tcoin-3d985",
-  storageBucket: "tcoin-3d985.firebasestorage.app",
+  storageBucket: "tcoin-3d985.appspot.com",
   messagingSenderId: "599645098741",
-  appId: "1:599645098741:web:2dc7d49cfc40ce49a52bbc",
-  measurementId: "G-5S3R9EP31T"
+  appId: "1:599645098741:web:2dc7d49cfc40ce49a52bbc"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+firebase.initializeApp(firebaseConfig);
 
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+const auth = firebase.auth();
+const db = firebase.database();
 
-<script src="firebase.js"></script>
-<script src="ads.js"></script>
-<script src="app.js"></script>
+let uid;
+
+// LOGIN
+function login(){
+ auth.signInWithEmailAndPassword(email.value,pass.value)
+ .then(user=>{
+  uid = user.user.uid;
+  startApp();
+ })
+ .catch(err=>{
+  alert(err.message);
+ });
+}
+
+// REGISTER
+function register(){
+ auth.createUserWithEmailAndPassword(email.value,pass.value)
+ .then(user=>{
+  uid = user.user.uid;
+
+  db.ref("users/"+uid).set({
+    balance:0
+  });
+
+  startApp();
+ })
+ .catch(err=>{
+  alert(err.message);
+ });
+}
+
+// START APP
+function startApp(){
+ document.getElementById("auth").style.display="none";
+ document.getElementById("app").classList.remove("hidden");
+ loadBalance();
+}
+
+// LOAD BALANCE
+function loadBalance(){
+ db.ref("users/"+uid+"/balance").on("value",snap=>{
+  bal.innerText = snap.val();
+ });
+}
+</script>
 
 </body>
 </html>
