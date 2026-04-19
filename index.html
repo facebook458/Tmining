@@ -1,142 +1,763 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Tcoin App</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<title>TCoin – Earn & Win</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-body{
- margin:0;
- font-family:sans-serif;
- background:linear-gradient(to right,#4facfe,#00f2fe);
- color:white;
+:root {
+  --gold: #F5C842;
+  --gold2: #FFE066;
+  --dark: #0D0D0D;
+  --dark2: #181818;
+  --dark3: #232323;
+  --card: #1E1E1E;
+  --border: #2C2C2C;
+  --text: #F0F0F0;
+  --muted: #888;
+  --green: #2ECC71;
+  --red: #E74C3C;
+  --blue: #3B8EF8;
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden;}
+h1,h2,h3,.logo{font-family:'Syne',sans-serif;}
 
-.box{
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:center;
- height:100vh;
-}
+/* ── AUTH SCREEN ── */
+#auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 60% 40%, #2a1f00 0%, var(--dark) 70%);}
+.auth-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 36px;width:100%;max-width:400px;box-shadow:0 40px 80px #00000088;}
+.auth-logo{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--gold);text-align:center;margin-bottom:4px;letter-spacing:-1px;}
+.auth-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:28px;}
+.tabs{display:flex;background:var(--dark3);border-radius:10px;padding:4px;margin-bottom:24px;gap:4px;}
+.tab-btn{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;border-radius:8px;transition:.2s;}
+.tab-btn.active{background:var(--gold);color:#000;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px;font-weight:500;}
+.form-group input{width:100%;padding:12px 16px;background:var(--dark3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;outline:none;transition:.2s;}
+.form-group input:focus{border-color:var(--gold);}
+.btn-gold{width:100%;padding:14px;background:var(--gold);color:#000;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:.2s;margin-top:8px;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
+.auth-msg{text-align:center;margin-top:12px;font-size:.85rem;color:var(--muted);}
+.auth-msg span{color:var(--gold);cursor:pointer;}
+#error-msg{color:var(--red);font-size:.83rem;text-align:center;min-height:18px;margin-top:8px;}
 
-input{
- margin:5px;
- padding:10px;
- width:80%;
- border:none;
- border-radius:5px;
-}
+/* ── MAIN APP ── */
+#app{display:none;max-width:480px;margin:0 auto;padding-bottom:80px;}
 
-button{
- background:green;
- color:white;
- border:none;
- padding:10px;
- width:85%;
- margin:5px;
- border-radius:5px;
-}
+/* HEADER */
+.header{background:var(--dark2);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-size:1.4rem;font-weight:800;color:var(--gold);letter-spacing:-0.5px;}
+.header-balance{display:flex;align-items:center;gap:6px;background:var(--dark3);border:1px solid var(--border);border-radius:50px;padding:6px 14px;}
+.header-balance .coin{font-size:1rem;}
+.header-balance span{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:var(--gold);}
+.avatar-btn{width:36px;height:36px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:#000;}
 
-.hidden{display:none;}
+/* SECTIONS */
+.section{padding:16px 16px 0;}
+.section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-.header{
- text-align:center;
- padding:10px;
-}
+/* BANNER ADS */
+.banner-ad{background:linear-gradient(135deg,#1a1200,#2d2000);border:1px solid #3a2f00;border-radius:14px;padding:16px;margin:12px 16px 0;text-align:center;font-size:.82rem;color:var(--muted);}
+.banner-ad strong{color:var(--gold);font-family:'Syne',sans-serif;}
+
+/* TASK CARDS */
+.task-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.task-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative;overflow:hidden;}
+.task-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:.2s;}
+.task-card:hover::before{opacity:1;}
+.task-card:hover{border-color:var(--gold);transform:translateY(-2px);}
+.task-icon{font-size:1.6rem;margin-bottom:8px;}
+.task-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.85rem;color:var(--text);}
+.task-reward{font-size:.78rem;color:var(--gold);margin-top:2px;}
+.task-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-size:.65rem;font-weight:700;font-family:'Syne',sans-serif;padding:2px 6px;border-radius:20px;}
+
+/* VIDEO LIST */
+.video-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:.2s;}
+.video-item:hover{border-color:var(--gold);}
+.video-thumb{width:52px;height:40px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.video-info{flex:1;}
+.video-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;color:var(--text);}
+.video-meta{font-size:.75rem;color:var(--muted);margin-top:2px;}
+.video-earn{background:var(--gold);color:#000;font-size:.72rem;font-weight:700;font-family:'Syne',sans-serif;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.video-item.watched{opacity:.5;pointer-events:none;}
+
+/* WEB TASKS */
+.web-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:.2s;}
+.web-item:hover{border-color:var(--blue);}
+.web-icon{width:40px;height:40px;background:var(--dark3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.web-info{flex:1;}
+.web-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
+.web-url{font-size:.73rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
+.btn-visit{background:var(--blue);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;}
+
+/* CHANNEL */
+.channel-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.ch-icon{width:44px;height:44px;background:linear-gradient(135deg,#c00,#f00);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.ch-info{flex:1;}
+.ch-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
+.ch-reward{font-size:.75rem;color:var(--gold);}
+.btn-join{background:var(--red);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;transition:.2s;}
+.btn-join:hover{background:#c0392b;}
+.btn-join.joined{background:var(--green);pointer-events:none;}
+
+/* REFERRAL BOX */
+.referral-box{background:linear-gradient(135deg,#1a1200,#1f1800);border:1px solid #3a2f00;border-radius:16px;padding:20px;margin-bottom:10px;}
+.ref-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:4px;}
+.ref-desc{font-size:.82rem;color:var(--muted);margin-bottom:14px;}
+.ref-link-box{display:flex;gap:8px;align-items:center;}
+.ref-link{flex:1;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.82rem;color:var(--text);font-family:'DM Sans',sans-serif;word-break:break-all;}
+.btn-copy{background:var(--gold);color:#000;border:none;padding:10px 16px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap;}
+.ref-stats{display:flex;gap:12px;margin-top:14px;}
+.ref-stat{flex:1;background:var(--dark3);border-radius:10px;padding:10px;text-align:center;}
+.ref-stat-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--gold);}
+.ref-stat-label{font-size:.72rem;color:var(--muted);margin-top:2px;}
+
+/* WALLET */
+.wallet-card{background:linear-gradient(135deg,#1a1200,#2d2000);border:1px solid #3a2f00;border-radius:18px;padding:24px;margin-bottom:16px;text-align:center;}
+.wallet-label{font-size:.82rem;color:var(--muted);margin-bottom:4px;}
+.wallet-balance{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:var(--gold);}
+.wallet-usd{font-size:.85rem;color:var(--muted);margin-top:2px;}
+.wallet-actions{display:flex;gap:10px;margin-top:16px;}
+.btn-withdraw{flex:1;padding:13px;background:var(--gold);color:#000;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;}
+.btn-withdraw:hover{background:var(--gold2);}
+
+/* WITHDRAW MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:#000000cc;z-index:999;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:400px;}
+.modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1;}
+select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;margin-bottom:12px;}
+
+/* HISTORY */
+.history-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.hist-info{}
+.hist-type{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
+.hist-date{font-size:.75rem;color:var(--muted);margin-top:2px;}
+.hist-amount{font-family:'Syne',sans-serif;font-weight:700;}
+.hist-amount.earned{color:var(--green);}
+.hist-amount.withdraw{color:var(--red);}
+.hist-status{font-size:.72rem;padding:3px 8px;border-radius:20px;font-weight:600;}
+.hist-status.pending{background:#332200;color:var(--gold);}
+.hist-status.approved{background:#0d2e1a;color:var(--green);}
+.hist-status.rejected{background:#2e0d0d;color:var(--red);}
+
+/* PROFILE */
+.profile-header{text-align:center;padding:24px 16px 16px;}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--gold);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:1.8rem;color:#000;}
+.profile-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;}
+.profile-email{font-size:.82rem;color:var(--muted);margin-top:3px;}
+.profile-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 16px;margin-bottom:16px;}
+.p-stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.p-stat-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:var(--gold);}
+.p-stat-label{font-size:.7rem;color:var(--muted);margin-top:2px;}
+.btn-logout{width:calc(100% - 32px);margin:0 16px;padding:13px;background:var(--dark3);border:1px solid var(--red);color:var(--red);border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--dark2);border-top:1px solid var(--border);display:flex;z-index:100;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 12px;cursor:pointer;transition:.2s;border:none;background:none;color:var(--muted);}
+.nav-item.active{color:var(--gold);}
+.nav-item .nav-icon{font-size:1.2rem;}
+.nav-item .nav-label{font-size:.6rem;font-family:'Syne',sans-serif;font-weight:600;}
+
+/* TOAST */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-10px);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 20px;font-size:.88rem;font-family:'Syne',sans-serif;font-weight:600;opacity:0;transition:.3s;z-index:9999;white-space:nowrap;pointer-events:none;box-shadow:0 8px 30px #00000088;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast.success{border-color:var(--green);color:var(--green);}
+.toast.error{border-color:var(--red);color:var(--red);}
+.toast.info{border-color:var(--gold);color:var(--gold);}
+
+/* LOADING */
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-state .e-icon{font-size:2.5rem;margin-bottom:10px;}
+.empty-state p{font-size:.88rem;}
 </style>
 </head>
-
 <body>
 
-<div id="auth" class="box">
- <h2>🔥 Tcoin Login</h2>
-
- <input id="email" placeholder="Email">
- <input id="pass" type="password" placeholder="Password">
-
- <button onclick="login()">Login</button>
- <button onclick="register()">Register</button>
+<!-- AUTH SCREEN -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">🪙 TCoin</div>
+    <div class="auth-sub">Earn coins. Get paid. Real money.</div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+    </div>
+    <div id="login-form">
+      <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="you@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+      <button class="btn-gold" onclick="doLogin()">Login</button>
+    </div>
+    <div id="register-form" style="display:none">
+      <div class="form-group"><label>Full Name</label><input type="text" id="reg-name" placeholder="Your name"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="you@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="reg-pass" placeholder="Min 6 chars"></div>
+      <div class="form-group"><label>Referral Code (optional)</label><input type="text" id="reg-ref" placeholder="ABC123"></div>
+      <button class="btn-gold" onclick="doRegister()">Create Account</button>
+    </div>
+    <div id="error-msg"></div>
+  </div>
 </div>
 
-<div id="app" class="hidden">
+<!-- MAIN APP -->
+<div id="app">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">🪙 TCoin</div>
+    <div class="header-balance"><span class="coin">🟡</span><span id="header-balance">0</span></div>
+    <button class="avatar-btn" id="avatar-btn" onclick="showPage('profile')">U</button>
+  </div>
 
- <div class="header">
-  <h2>Dashboard</h2>
-  <h3>Balance: <span id="bal">0</span></h3>
- </div>
+  <!-- PAGES -->
+  <div id="page-home">
+    <!-- Banner Ad slot (admin injects script here) -->
+    <div class="banner-ad" id="banner-ad-slot">
+      <strong>📢 Advertisement</strong><br>
+      <span id="banner-ad-content">Ad loads here from Admin Panel</span>
+    </div>
 
- <button onclick="loadBalance()">Refresh</button>
+    <div class="section">
+      <div class="section-title">⚡ Quick Earn</div>
+      <div class="task-grid">
+        <div class="task-card" onclick="showPage('ads')">
+          <div class="task-badge">🔥</div>
+          <div class="task-icon">📢</div>
+          <div class="task-name">Watch Ads</div>
+          <div class="task-reward">+2 TCoin each</div>
+        </div>
+        <div class="task-card" onclick="showPage('videos')">
+          <div class="task-badge">10/day</div>
+          <div class="task-icon">🎬</div>
+          <div class="task-name">Watch Videos</div>
+          <div class="task-reward">+1 TCoin each</div>
+        </div>
+        <div class="task-card" onclick="showPage('web')">
+          <div class="task-icon">🌐</div>
+          <div class="task-name">Web Tasks</div>
+          <div class="task-reward">+2 TCoin each</div>
+        </div>
+        <div class="task-card" onclick="showPage('channels')">
+          <div class="task-icon">📺</div>
+          <div class="task-name">Join Channels</div>
+          <div class="task-reward">+1 TCoin each</div>
+        </div>
+      </div>
+    </div>
 
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">👥 Referral</div>
+      <div class="referral-box">
+        <div class="ref-title">Invite & Earn 10% lifetime!</div>
+        <div class="ref-desc">Your friend earns, you earn. Forever.</div>
+        <div class="ref-link-box">
+          <div class="ref-link" id="ref-link-display">Loading...</div>
+          <button class="btn-copy" onclick="copyRef()">Copy</button>
+        </div>
+        <div class="ref-stats">
+          <div class="ref-stat"><div class="ref-stat-val" id="ref-count">0</div><div class="ref-stat-label">Referrals</div></div>
+          <div class="ref-stat"><div class="ref-stat-val" id="ref-earned">0</div><div class="ref-stat-label">TCoin Earned</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="margin-top:0;padding-bottom:16px;">
+      <div class="section-title">💬 Support</div>
+      <button class="btn-gold" onclick="alert('Contact: support@tcoin.app')">📩 Contact Support</button>
+    </div>
+  </div>
+
+  <!-- ADS PAGE -->
+  <div id="page-ads" style="display:none">
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">📢 Ad Tasks</div>
+      <div id="ads-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading ads...</p></div></div>
+    </div>
+  </div>
+
+  <!-- VIDEOS PAGE -->
+  <div id="page-videos" style="display:none">
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">🎬 Videos <span style="font-size:.75rem;color:var(--muted);font-family:'DM Sans'">(<span id="videos-watched">0</span>/10 today)</span></div>
+      <div id="video-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading videos...</p></div></div>
+    </div>
+  </div>
+
+  <!-- WEB TASKS PAGE -->
+  <div id="page-web" style="display:none">
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">🌐 Web Tasks</div>
+      <div id="web-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading tasks...</p></div></div>
+    </div>
+  </div>
+
+  <!-- CHANNELS PAGE -->
+  <div id="page-channels" style="display:none">
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">📺 Channels to Join</div>
+      <div id="channel-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading channels...</p></div></div>
+    </div>
+  </div>
+
+  <!-- WALLET PAGE -->
+  <div id="page-wallet" style="display:none">
+    <div class="section" style="margin-top:16px;">
+      <div class="section-title">💰 My Wallet</div>
+      <div class="wallet-card">
+        <div class="wallet-label">Total Balance</div>
+        <div class="wallet-balance" id="wallet-balance">0 <span style="font-size:1.2rem">T</span></div>
+        <div class="wallet-usd">≈ $<span id="wallet-usd">0.00</span> USD</div>
+        <div class="wallet-actions">
+          <button class="btn-withdraw" onclick="openWithdraw()">💸 Withdraw</button>
+        </div>
+      </div>
+      <div class="section-title">📋 History</div>
+      <div id="history-list"><div class="empty-state"><div class="e-icon">📭</div><p>No transactions yet</p></div></div>
+    </div>
+  </div>
+
+  <!-- PROFILE PAGE -->
+  <div id="page-profile" style="display:none">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profile-avatar">U</div>
+      <div class="profile-name" id="profile-name">User</div>
+      <div class="profile-email" id="profile-email">email</div>
+    </div>
+    <div class="profile-stats">
+      <div class="p-stat"><div class="p-stat-val" id="p-balance">0</div><div class="p-stat-label">Balance</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="p-earned">0</div><div class="p-stat-label">Total Earned</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="p-refs">0</div><div class="p-stat-label">Referrals</div></div>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">🚪 Logout</button>
+  </div>
 </div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottom-nav" style="display:none">
+  <button class="nav-item active" onclick="showPage('home')" id="nav-home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+  <button class="nav-item" onclick="showPage('ads')" id="nav-ads"><span class="nav-icon">📢</span><span class="nav-label">Ads</span></button>
+  <button class="nav-item" onclick="showPage('videos')" id="nav-videos"><span class="nav-icon">🎬</span><span class="nav-label">Videos</span></button>
+  <button class="nav-item" onclick="showPage('web')" id="nav-web"><span class="nav-icon">🌐</span><span class="nav-label">Web</span></button>
+  <button class="nav-item" onclick="showPage('wallet')" id="nav-wallet"><span class="nav-icon">💳</span><span class="nav-label">Wallet</span></button>
+</div>
 
-<script>
+<!-- WITHDRAW MODAL -->
+<div class="modal-overlay" id="withdraw-modal">
+  <div class="modal">
+    <div class="modal-title">💸 Withdraw Funds <button class="modal-close" onclick="closeWithdraw()">✕</button></div>
+    <div class="form-group"><label>Amount ($)</label>
+      <select id="w-amount">
+        <option value="5">$5 (5,000 TCoin)</option>
+        <option value="10">$10 (10,000 TCoin)</option>
+        <option value="20">$20 (20,000 TCoin)</option>
+        <option value="50">$50 (50,000 TCoin)</option>
+        <option value="100">$100 (100,000 TCoin)</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Payment Method</label>
+      <select id="w-method">
+        <option value="bkash">bKash</option>
+        <option value="payoneer">Payoneer</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Account Number / Email</label><input type="text" id="w-number" placeholder="bKash: 01xxxxxxxx"></div>
+    <div id="w-error" style="color:var(--red);font-size:.82rem;margin-bottom:10px;min-height:16px;"></div>
+    <button class="btn-gold" onclick="submitWithdraw()">Submit Request</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════
+     FIREBASE SDK
+     ─ Paste your firebaseConfig below (already done)
+     ═══════════════════════════════════════════ -->
+<script type="module">
+// ── CHANGE: Replace with your Firebase config if needed ──
+// Current config is already set from your project
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection,
+  query, where, onSnapshot, getDocs, orderBy, increment, serverTimestamp, limit }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── YOUR FIREBASE CONFIG (already filled in) ──
 const firebaseConfig = {
   apiKey: "AIzaSyAwEJXhlSz_2PPORwQcsqcOGTmZuUC4UZ8",
   authDomain: "tcoin-3d985.firebaseapp.com",
   databaseURL: "https://tcoin-3d985-default-rtdb.firebaseio.com",
   projectId: "tcoin-3d985",
-  storageBucket: "tcoin-3d985.appspot.com",
+  storageBucket: "tcoin-3d985.firebasestorage.app",
   messagingSenderId: "599645098741",
-  appId: "1:599645098741:web:2dc7d49cfc40ce49a52bbc"
+  appId: "1:599645098741:web:2dc7d49cfc40ce49a52bbc",
+  measurementId: "G-5S3R9EP31T"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const auth = firebase.auth();
-const db = firebase.database();
+// ── State ──
+let currentUser = null;
+let userData = null;
+let todayVideoCount = 0;
+const TODAY = new Date().toDateString();
 
-let uid;
+// ── HELPERS ──
+window.showToast = (msg, type='info') => {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast show ${type}`;
+  setTimeout(() => t.className = 'toast', 2800);
+};
 
-// LOGIN
-function login(){
- auth.signInWithEmailAndPassword(email.value,pass.value)
- .then(user=>{
-  uid = user.user.uid;
-  startApp();
- })
- .catch(err=>{
-  alert(err.message);
- });
-}
+function setError(msg) { document.getElementById('error-msg').textContent = msg; }
 
-// REGISTER
-function register(){
- auth.createUserWithEmailAndPassword(email.value,pass.value)
- .then(user=>{
-  uid = user.user.uid;
+// ── TABS (auth screen) ──
+window.switchTab = (tab) => {
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
+  document.getElementById('register-form').style.display = tab==='register'?'block':'none';
+  setError('');
+};
 
-  db.ref("users/"+uid).set({
-    balance:0
+// ── GENERATE REFERRAL CODE ──
+function genRefCode(len=6){ return Math.random().toString(36).toUpperCase().slice(2,2+len); }
+
+// ── REGISTER ──
+window.doRegister = async () => {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  const refCode = document.getElementById('reg-ref').value.trim().toUpperCase();
+  if(!name||!email||!pass){ setError('All fields required'); return; }
+  if(pass.length<6){ setError('Password min 6 chars'); return; }
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    const uid = cred.user.uid;
+    let referredByUid = null;
+    if(refCode){
+      // ── Find who owns this referral code ──
+      const q = query(collection(db,'users'), where('referralCode','==',refCode), limit(1));
+      const snap = await getDocs(q);
+      if(!snap.empty) referredByUid = snap.docs[0].id;
+    }
+    const myCode = genRefCode();
+    // ── Save user doc to Firestore /users/{uid} ──
+    await setDoc(doc(db,'users',uid),{
+      uid, name, email,
+      balance: 0,
+      totalEarned: 0,
+      referralCode: myCode,
+      referredBy: referredByUid || null,
+      withdrawCount: 0,
+      lastWithdrawDate: null,
+      joinedAt: serverTimestamp()
+    });
+    showToast('Account created! Welcome 🎉','success');
+  } catch(e){ setError(e.message); }
+};
+
+// ── LOGIN ──
+window.doLogin = async () => {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if(!email||!pass){ setError('Enter email & password'); return; }
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e){ setError('Invalid credentials'); }
+};
+
+// ── LOGOUT ──
+window.doLogout = async () => { await signOut(auth); };
+
+// ── AUTH STATE ──
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    currentUser = user;
+    await loadUserData();
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('bottom-nav').style.display = 'flex';
+    loadPageData('home');
+  } else {
+    currentUser = null; userData = null;
+    document.getElementById('auth-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('bottom-nav').style.display = 'none';
+  }
+});
+
+// ── LOAD USER DATA (realtime) ──
+async function loadUserData(){
+  const ref = doc(db,'users',currentUser.uid);
+  onSnapshot(ref, snap => {
+    if(!snap.exists()) return;
+    userData = snap.data();
+    // Update UI
+    document.getElementById('header-balance').textContent = userData.balance || 0;
+    document.getElementById('wallet-balance').textContent = (userData.balance||0)+' T';
+    document.getElementById('wallet-usd').textContent = ((userData.balance||0)/1000).toFixed(2);
+    document.getElementById('p-balance').textContent = userData.balance || 0;
+    document.getElementById('p-earned').textContent = userData.totalEarned || 0;
+    document.getElementById('p-refs').textContent = '—';
+    document.getElementById('profile-name').textContent = userData.name || 'User';
+    document.getElementById('profile-email').textContent = userData.email || '';
+    document.getElementById('profile-avatar').textContent = (userData.name||'U')[0].toUpperCase();
+    document.getElementById('avatar-btn').textContent = (userData.name||'U')[0].toUpperCase();
+    // Referral
+    const refLink = `${location.origin}${location.pathname}?ref=${userData.referralCode}`;
+    document.getElementById('ref-link-display').textContent = refLink;
   });
-
-  startApp();
- })
- .catch(err=>{
-  alert(err.message);
- });
+  // Load today's video watch count
+  // ── /users/{uid}/videoProgress/{today} stores count ──
+  const vpRef = doc(db,'users',currentUser.uid,'videoProgress',TODAY);
+  const vpSnap = await getDoc(vpRef);
+  todayVideoCount = vpSnap.exists() ? (vpSnap.data().count||0) : 0;
+  document.getElementById('videos-watched').textContent = todayVideoCount;
 }
 
-// START APP
-function startApp(){
- document.getElementById("auth").style.display="none";
- document.getElementById("app").classList.remove("hidden");
- loadBalance();
+// ── ADD COINS ──
+async function addCoins(amount, label){
+  if(!currentUser) return;
+  const ref = doc(db,'users',currentUser.uid);
+  await updateDoc(ref,{ balance: increment(amount), totalEarned: increment(amount) });
+  // ── Add to history collection ──
+  await addDoc(collection(db,'users',currentUser.uid,'history'),{
+    type: label, amount, createdAt: serverTimestamp()
+  });
+  // ── Referral commission ──
+  if(userData?.referredBy){
+    await updateDoc(doc(db,'users',userData.referredBy),{
+      balance: increment(Math.floor(amount*0.1)),
+      totalEarned: increment(Math.floor(amount*0.1))
+    });
+  }
+  showToast(`+${amount} TCoin earned! 🟡`,'success');
 }
 
-// LOAD BALANCE
-function loadBalance(){
- db.ref("users/"+uid+"/balance").on("value",snap=>{
-  bal.innerText = snap.val();
- });
+// ── NAVIGATION ──
+window.showPage = (page) => {
+  ['home','ads','videos','web','channels','wallet','profile'].forEach(p=>{
+    document.getElementById('page-'+p).style.display = p===page?'block':'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const nv = document.getElementById('nav-'+page);
+  if(nv) nv.classList.add('active');
+  loadPageData(page);
+};
+
+window.loadPageData = (page) => {
+  if(page==='videos') loadVideos();
+  if(page==='ads') loadAds();
+  if(page==='web') loadWebTasks();
+  if(page==='channels') loadChannels();
+  if(page==='wallet') loadHistory();
+};
+
+// ── LOAD VIDEOS ──
+async function loadVideos(){
+  const list = document.getElementById('video-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  // ── Read from Firestore /videos collection ──
+  const q = query(collection(db,'videos'));
+  const snap = await getDocs(q);
+  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🎬</div><p>No videos yet</p></div>'; return; }
+  let html='';
+  snap.forEach(d=>{
+    const v=d.data();
+    html+=`<div class="video-item ${todayVideoCount>=10?'watched':''}" onclick="watchVideo('${d.id}','${v.url||''}',${v.reward||1})">
+      <div class="video-thumb">▶️</div>
+      <div class="video-info"><div class="video-title">${v.title||'Video'}</div><div class="video-meta">${v.reward||1} TCoin reward</div></div>
+      <div class="video-earn">+${v.reward||1}T</div>
+    </div>`;
+  });
+  list.innerHTML = html;
 }
+
+window.watchVideo = async (vid, url, reward) => {
+  if(todayVideoCount>=10){ showToast('Daily video limit reached (10/day)','error'); return; }
+  if(url) window.open(url,'_blank');
+  // Wait 15s then credit (simulate watch)
+  showToast('Watch the video... coins in 15s ⏳','info');
+  setTimeout(async()=>{
+    todayVideoCount++;
+    document.getElementById('videos-watched').textContent = todayVideoCount;
+    // ── Update /users/{uid}/videoProgress/{today} ──
+    const vpRef = doc(db,'users',currentUser.uid,'videoProgress',TODAY);
+    await setDoc(vpRef,{ count: todayVideoCount },{ merge: true });
+    await addCoins(reward,'Video Watch');
+    await loadVideos();
+  },15000);
+};
+
+// ── LOAD ADS ──
+async function loadAds(){
+  const list = document.getElementById('ads-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  // ── Read from Firestore /ads collection ──
+  const snap = await getDocs(collection(db,'ads'));
+  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📢</div><p>No ads tasks yet</p></div>'; return; }
+  let html='';
+  snap.forEach(d=>{
+    const a=d.data();
+    // Inject ad script into banner slot if banner type
+    if(a.type==='banner'&&a.script){
+      document.getElementById('banner-ad-content').innerHTML = a.script;
+    }
+    html+=`<div class="task-card" style="width:100%;margin-bottom:10px;" onclick="watchAd('${d.id}',${a.reward||2})">
+      <div class="task-icon">📢</div>
+      <div class="task-name">${a.type||'Ad'} Task</div>
+      <div class="task-reward">+${a.reward||2} TCoin — Click to view</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">Type: ${a.type||'popup'}</div>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
+window.watchAd = async (adId, reward) => {
+  showToast('Ad opened — come back in 10s ⏳','info');
+  setTimeout(async()=>{ await addCoins(reward,'Ads Click'); },10000);
+};
+
+// ── LOAD WEB TASKS ──
+async function loadWebTasks(){
+  const list = document.getElementById('web-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  // ── Read from Firestore /webTasks collection ──
+  const snap = await getDocs(collection(db,'webTasks'));
+  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🌐</div><p>No web tasks yet</p></div>'; return; }
+  let html='';
+  snap.forEach(d=>{
+    const w=d.data();
+    html+=`<div class="web-item">
+      <div class="web-icon">🌐</div>
+      <div class="web-info"><div class="web-title">Visit & Earn</div><div class="web-url">${w.url||'#'}</div></div>
+      <button class="btn-visit" onclick="doWebTask('${d.id}','${w.url||'#'}',${w.reward||2})">+${w.reward||2}T</button>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
+window.doWebTask = async (id, url, reward) => {
+  if(url) window.open(url,'_blank');
+  showToast('Visiting site... earn in 8s ⏳','info');
+  setTimeout(async()=>{ await addCoins(reward,'Web Task'); },8000);
+};
+
+// ── LOAD CHANNELS ──
+async function loadChannels(){
+  const list = document.getElementById('channel-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  // ── Read joined channels from user sub-collection ──
+  const joinedSnap = await getDocs(collection(db,'users',currentUser.uid,'joinedChannels'));
+  const joinedIds = new Set(joinedSnap.docs.map(d=>d.id));
+  // ── Read from Firestore /channels collection ──
+  const snap = await getDocs(collection(db,'channels'));
+  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📺</div><p>No channels yet</p></div>'; return; }
+  let html='';
+  snap.forEach(d=>{
+    const c=d.data();
+    const joined = joinedIds.has(d.id);
+    html+=`<div class="channel-item">
+      <div class="ch-icon">▶</div>
+      <div class="ch-info"><div class="ch-name">${c.name||'Channel'}</div><div class="ch-reward">+${c.reward||1} TCoin</div></div>
+      <button class="btn-join ${joined?'joined':''}" onclick="joinChannel('${d.id}','${c.url||'#'}',${c.reward||1})">${joined?'✓ Joined':'Join'}</button>
+    </div>`;
+  });
+  list.innerHTML = html;
+}
+
+window.joinChannel = async (id, url, reward) => {
+  if(url) window.open(url,'_blank');
+  // ── Save joined record in /users/{uid}/joinedChannels/{channelId} ──
+  await setDoc(doc(db,'users',currentUser.uid,'joinedChannels',id),{ joinedAt: serverTimestamp() });
+  await addCoins(reward,'Channel Join');
+  await loadChannels();
+};
+
+// ── LOAD HISTORY ──
+async function loadHistory(){
+  const list = document.getElementById('history-list');
+  // ── Read from /users/{uid}/history and /withdraw ──
+  const hSnap = await getDocs(query(collection(db,'users',currentUser.uid,'history'), orderBy('createdAt','desc')));
+  const wSnap = await getDocs(query(collection(db,'withdraw'), where('userId','==',currentUser.uid), orderBy('createdAt','desc')));
+  if(hSnap.empty && wSnap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📭</div><p>No transactions yet</p></div>'; return; }
+  let html='';
+  wSnap.forEach(d=>{
+    const w=d.data();
+    html+=`<div class="history-item">
+      <div class="hist-info"><div class="hist-type">💸 Withdraw – ${w.method}</div><div class="hist-date">${w.createdAt?.toDate?.()?.toLocaleDateString()||'—'}</div></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+        <div class="hist-amount withdraw">-$${w.amount}</div>
+        <span class="hist-status ${w.status}">${w.status}</span>
+      </div>
+    </div>`;
+  });
+  hSnap.forEach(d=>{
+    const h=d.data();
+    html+=`<div class="history-item">
+      <div class="hist-info"><div class="hist-type">${h.type||'Earn'}</div><div class="hist-date">${h.createdAt?.toDate?.()?.toLocaleDateString()||'—'}</div></div>
+      <div class="hist-amount earned">+${h.amount}T</div>
+    </div>`;
+  });
+  list.innerHTML = html || '<div class="empty-state"><div class="e-icon">📭</div><p>No history</p></div>';
+}
+
+// ── REFERRAL ──
+window.copyRef = () => {
+  const text = document.getElementById('ref-link-display').textContent;
+  navigator.clipboard.writeText(text).then(()=>showToast('Referral link copied! 🔗','success'));
+};
+
+// ── WITHDRAW ──
+window.openWithdraw = () => {
+  document.getElementById('w-error').textContent='';
+  document.getElementById('withdraw-modal').classList.add('open');
+};
+window.closeWithdraw = () => document.getElementById('withdraw-modal').classList.remove('open');
+
+window.submitWithdraw = async () => {
+  const amount = parseInt(document.getElementById('w-amount').value);
+  const method = document.getElementById('w-method').value;
+  const number = document.getElementById('w-number').value.trim();
+  const errEl = document.getElementById('w-error');
+  if(!number){ errEl.textContent='Enter account number/email'; return; }
+  if(!userData){ return; }
+  const coinsNeeded = amount * 1000;
+  if((userData.balance||0) < coinsNeeded){ errEl.textContent=`Need ${coinsNeeded} TCoin (you have ${userData.balance||0})`; return; }
+  // ── Daily limit: 2 withdrawals per day ──
+  const todayStr = new Date().toDateString();
+  if(userData.lastWithdrawDate===todayStr && (userData.withdrawCount||0)>=2){
+    errEl.textContent='Daily withdraw limit reached (2/day)'; return;
+  }
+  // ── Deduct coins and submit to /withdraw collection ──
+  await updateDoc(doc(db,'users',currentUser.uid),{
+    balance: increment(-coinsNeeded),
+    withdrawCount: (userData.lastWithdrawDate===todayStr) ? increment(1) : 1,
+    lastWithdrawDate: todayStr
+  });
+  // ── Save withdraw request to /withdraw collection ──
+  await addDoc(collection(db,'withdraw'),{
+    userId: currentUser.uid,
+    userName: userData.name,
+    amount, method, number,
+    status: 'pending',
+    createdAt: serverTimestamp()
+  });
+  closeWithdraw();
+  showToast('Withdraw request submitted! ✅','success');
+  loadHistory();
+};
+
+// ── AUTO REF CODE ON URL ──
+const urlRef = new URLSearchParams(location.search).get('ref');
+if(urlRef) document.getElementById('reg-ref').value = urlRef;
 </script>
-
 </body>
 </html>
