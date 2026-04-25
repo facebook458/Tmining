@@ -6,28 +6,21 @@
 <title>TCoin – Earn & Win</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --gold: #F5C842;
-  --gold2: #FFE066;
-  --dark: #0D0D0D;
-  --dark2: #181818;
-  --dark3: #232323;
-  --card: #1E1E1E;
-  --border: #2C2C2C;
-  --text: #F0F0F0;
-  --muted: #888;
-  --green: #2ECC71;
-  --red: #E74C3C;
-  --blue: #3B8EF8;
+:root{
+  --gold:#F5C842;--gold2:#FFE066;
+  --dark:#0D0D0D;--dark2:#181818;--dark3:#232323;
+  --card:#1E1E1E;--border:#2C2C2C;
+  --text:#F0F0F0;--muted:#888;
+  --green:#2ECC71;--red:#E74C3C;--blue:#3B8EF8;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden;}
 h1,h2,h3,.logo{font-family:'Syne',sans-serif;}
 
-/* ── AUTH SCREEN ── */
-#auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 60% 40%, #2a1f00 0%, var(--dark) 70%);}
+/* AUTH */
+#auth-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse at 60% 40%,#2a1f00,var(--dark) 70%);}
 .auth-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 36px;width:100%;max-width:400px;box-shadow:0 40px 80px #00000088;}
-.auth-logo{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--gold);text-align:center;margin-bottom:4px;letter-spacing:-1px;}
+.auth-logo{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--gold);text-align:center;margin-bottom:4px;}
 .auth-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:28px;}
 .tabs{display:flex;background:var(--dark3);border-radius:10px;padding:4px;margin-bottom:24px;gap:4px;}
 .tab-btn{flex:1;padding:10px;border:none;background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;border-radius:8px;transition:.2s;}
@@ -37,77 +30,85 @@ h1,h2,h3,.logo{font-family:'Syne',sans-serif;}
 .form-group input{width:100%;padding:12px 16px;background:var(--dark3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;outline:none;transition:.2s;}
 .form-group input:focus{border-color:var(--gold);}
 .btn-gold{width:100%;padding:14px;background:var(--gold);color:#000;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:.2s;margin-top:8px;}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-1px);}
-.auth-msg{text-align:center;margin-top:12px;font-size:.85rem;color:var(--muted);}
-.auth-msg span{color:var(--gold);cursor:pointer;}
+.btn-gold:hover{background:var(--gold2);}
 #error-msg{color:var(--red);font-size:.83rem;text-align:center;min-height:18px;margin-top:8px;}
 
-/* ── MAIN APP ── */
+/* APP */
 #app{display:none;max-width:480px;margin:0 auto;padding-bottom:80px;}
 
 /* HEADER */
 .header{background:var(--dark2);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.logo{font-size:1.4rem;font-weight:800;color:var(--gold);letter-spacing:-0.5px;}
+.logo{font-size:1.4rem;font-weight:800;color:var(--gold);}
 .header-balance{display:flex;align-items:center;gap:6px;background:var(--dark3);border:1px solid var(--border);border-radius:50px;padding:6px 14px;}
-.header-balance .coin{font-size:1rem;}
 .header-balance span{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:var(--gold);}
 .avatar-btn{width:36px;height:36px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;color:#000;}
 
 /* SECTIONS */
 .section{padding:16px 16px 0;}
-.section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* BANNER ADS */
-.banner-ad{background:linear-gradient(135deg,#1a1200,#2d2000);border:1px solid #3a2f00;border-radius:14px;padding:16px;margin:12px 16px 0;text-align:center;font-size:.82rem;color:var(--muted);}
-.banner-ad strong{color:var(--gold);font-family:'Syne',sans-serif;}
-
-/* TASK CARDS */
+/* HOME TASKS */
 .task-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .task-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:.2s;position:relative;overflow:hidden;}
 .task-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:.2s;}
-.task-card:hover::before{opacity:1;}
+.task-card:hover::before,.task-card:active::before{opacity:1;}
 .task-card:hover{border-color:var(--gold);transform:translateY(-2px);}
 .task-icon{font-size:1.6rem;margin-bottom:8px;}
-.task-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.85rem;color:var(--text);}
+.task-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.85rem;}
 .task-reward{font-size:.78rem;color:var(--gold);margin-top:2px;}
 .task-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:#000;font-size:.65rem;font-weight:700;font-family:'Syne',sans-serif;padding:2px 6px;border-radius:20px;}
 
-/* VIDEO LIST */
+/* ── ADS SECTION ── */
+.ad-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;overflow:hidden;}
+.ad-item-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ad-item-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;}
+.ad-reward-badge{background:var(--gold);color:#000;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;padding:4px 10px;border-radius:20px;}
+/* Script ad rendered area */
+.ad-script-area{background:var(--dark3);border-radius:8px;padding:12px;min-height:60px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;overflow:hidden;}
+/* Link ad card */
+.ad-link-card{display:flex;align-items:center;gap:12px;background:var(--dark3);border-radius:10px;padding:12px;margin-bottom:10px;text-decoration:none;}
+.ad-link-icon{width:44px;height:44px;background:linear-gradient(135deg,#2a1f00,#3d2e00);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.ad-link-info{flex:1;}
+.ad-link-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;color:var(--text);}
+.ad-link-url{font-size:.73rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;margin-top:2px;}
+.btn-visit-ad{background:var(--gold);color:#000;border:none;padding:8px 16px;border-radius:20px;font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.btn-visit-ad:disabled{opacity:.5;cursor:not-allowed;}
+.ad-earn-note{font-size:.73rem;color:var(--muted);margin-top:6px;text-align:center;}
+
+/* VIDEOS */
 .video-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:.2s;}
 .video-item:hover{border-color:var(--gold);}
+.video-item.watched{opacity:.4;pointer-events:none;}
 .video-thumb{width:52px;height:40px;background:var(--dark3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
 .video-info{flex:1;}
-.video-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;color:var(--text);}
+.video-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
 .video-meta{font-size:.75rem;color:var(--muted);margin-top:2px;}
 .video-earn{background:var(--gold);color:#000;font-size:.72rem;font-weight:700;font-family:'Syne',sans-serif;padding:4px 10px;border-radius:20px;white-space:nowrap;}
-.video-item.watched{opacity:.5;pointer-events:none;}
 
-/* WEB TASKS */
-.web-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;transition:.2s;}
-.web-item:hover{border-color:var(--blue);}
+/* WEB */
+.web-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .web-icon{width:40px;height:40px;background:var(--dark3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
 .web-info{flex:1;}
 .web-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
 .web-url{font-size:.73rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
 .btn-visit{background:var(--blue);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;}
 
-/* CHANNEL */
+/* CHANNELS */
 .channel-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;}
 .ch-icon{width:44px;height:44px;background:linear-gradient(135deg,#c00,#f00);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
 .ch-info{flex:1;}
 .ch-name{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
 .ch-reward{font-size:.75rem;color:var(--gold);}
-.btn-join{background:var(--red);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;transition:.2s;}
-.btn-join:hover{background:#c0392b;}
+.btn-join{background:var(--red);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:.75rem;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;}
 .btn-join.joined{background:var(--green);pointer-events:none;}
 
-/* REFERRAL BOX */
+/* REFERRAL */
 .referral-box{background:linear-gradient(135deg,#1a1200,#1f1800);border:1px solid #3a2f00;border-radius:16px;padding:20px;margin-bottom:10px;}
 .ref-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:4px;}
 .ref-desc{font-size:.82rem;color:var(--muted);margin-bottom:14px;}
 .ref-link-box{display:flex;gap:8px;align-items:center;}
-.ref-link{flex:1;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.82rem;color:var(--text);font-family:'DM Sans',sans-serif;word-break:break-all;}
+.ref-link{flex:1;background:var(--dark3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;font-size:.78rem;color:var(--text);word-break:break-all;}
 .btn-copy{background:var(--gold);color:#000;border:none;padding:10px 16px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap;}
 .ref-stats{display:flex;gap:12px;margin-top:14px;}
 .ref-stat{flex:1;background:var(--dark3);border-radius:10px;padding:10px;text-align:center;}
@@ -119,27 +120,24 @@ h1,h2,h3,.logo{font-family:'Syne',sans-serif;}
 .wallet-label{font-size:.82rem;color:var(--muted);margin-bottom:4px;}
 .wallet-balance{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;color:var(--gold);}
 .wallet-usd{font-size:.85rem;color:var(--muted);margin-top:2px;}
-.wallet-actions{display:flex;gap:10px;margin-top:16px;}
-.btn-withdraw{flex:1;padding:13px;background:var(--gold);color:#000;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;}
-.btn-withdraw:hover{background:var(--gold2);}
+.wallet-actions{margin-top:16px;}
+.btn-withdraw{width:100%;padding:13px;background:var(--gold);color:#000;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;}
 
-/* WITHDRAW MODAL */
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:#000000cc;z-index:999;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.open{display:flex;}
 .modal{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;width:100%;max-width:400px;}
 .modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
-.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1;}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;}
 select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;margin-bottom:12px;}
 
 /* HISTORY */
 .history-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
-.hist-info{}
 .hist-type{font-family:'Syne',sans-serif;font-weight:600;font-size:.88rem;}
 .hist-date{font-size:.75rem;color:var(--muted);margin-top:2px;}
-.hist-amount{font-family:'Syne',sans-serif;font-weight:700;}
-.hist-amount.earned{color:var(--green);}
-.hist-amount.withdraw{color:var(--red);}
-.hist-status{font-size:.72rem;padding:3px 8px;border-radius:20px;font-weight:600;}
+.hist-amount.earned{color:var(--green);font-family:'Syne',sans-serif;font-weight:700;}
+.hist-amount.withdraw{color:var(--red);font-family:'Syne',sans-serif;font-weight:700;}
+.hist-status{font-size:.72rem;padding:3px 8px;border-radius:20px;font-weight:600;font-family:'Syne',sans-serif;}
 .hist-status.pending{background:#332200;color:var(--gold);}
 .hist-status.approved{background:#0d2e1a;color:var(--green);}
 .hist-status.rejected{background:#2e0d0d;color:var(--red);}
@@ -159,19 +157,16 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--dark2);border-top:1px solid var(--border);display:flex;z-index:100;}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 12px;cursor:pointer;transition:.2s;border:none;background:none;color:var(--muted);}
 .nav-item.active{color:var(--gold);}
-.nav-item .nav-icon{font-size:1.2rem;}
-.nav-item .nav-label{font-size:.6rem;font-family:'Syne',sans-serif;font-weight:600;}
+.nav-icon{font-size:1.2rem;}
+.nav-label{font-size:.6rem;font-family:'Syne',sans-serif;font-weight:600;}
 
 /* TOAST */
-.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-10px);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 20px;font-size:.88rem;font-family:'Syne',sans-serif;font-weight:600;opacity:0;transition:.3s;z-index:9999;white-space:nowrap;pointer-events:none;box-shadow:0 8px 30px #00000088;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.success{border-color:var(--green);color:var(--green);}
-.toast.error{border-color:var(--red);color:var(--red);}
-.toast.info{border-color:var(--gold);color:var(--gold);}
+#toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-10px);background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 20px;font-size:.88rem;font-family:'Syne',sans-serif;font-weight:600;opacity:0;transition:.3s;z-index:9999;white-space:nowrap;pointer-events:none;box-shadow:0 8px 30px #00000088;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast.success{border-color:var(--green);color:var(--green);}
+#toast.error{border-color:var(--red);color:var(--red);}
+#toast.info{border-color:var(--gold);color:var(--gold);}
 
-/* LOADING */
-.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty-state .e-icon{font-size:2.5rem;margin-bottom:10px;}
 .empty-state p{font-size:.88rem;}
@@ -179,26 +174,26 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
+<!-- AUTH -->
 <div id="auth-screen">
   <div class="auth-box">
     <div class="auth-logo">🪙 TCoin</div>
     <div class="auth-sub">Earn coins. Get paid. Real money.</div>
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
-      <button class="tab-btn" onclick="switchTab('register')">Register</button>
+      <button class="tab-btn active" id="tab-login">Login</button>
+      <button class="tab-btn" id="tab-register">Register</button>
     </div>
     <div id="login-form">
       <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="you@email.com"></div>
       <div class="form-group"><label>Password</label><input type="password" id="login-pass" placeholder="••••••••"></div>
-      <button class="btn-gold" onclick="doLogin()">Login</button>
+      <button class="btn-gold" id="do-login-btn">Login</button>
     </div>
     <div id="register-form" style="display:none">
       <div class="form-group"><label>Full Name</label><input type="text" id="reg-name" placeholder="Your name"></div>
       <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="you@email.com"></div>
       <div class="form-group"><label>Password</label><input type="password" id="reg-pass" placeholder="Min 6 chars"></div>
       <div class="form-group"><label>Referral Code (optional)</label><input type="text" id="reg-ref" placeholder="ABC123"></div>
-      <button class="btn-gold" onclick="doRegister()">Create Account</button>
+      <button class="btn-gold" id="do-register-btn">Create Account</button>
     </div>
     <div id="error-msg"></div>
   </div>
@@ -206,49 +201,23 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 
 <!-- MAIN APP -->
 <div id="app">
-  <!-- HEADER -->
   <div class="header">
     <div class="logo">🪙 TCoin</div>
-    <div class="header-balance"><span class="coin">🟡</span><span id="header-balance">0</span></div>
-    <button class="avatar-btn" id="avatar-btn" onclick="showPage('profile')">U</button>
+    <div class="header-balance"><span>🟡</span><span id="header-balance">0</span></div>
+    <button class="avatar-btn" id="avatar-btn">U</button>
   </div>
 
-  <!-- PAGES -->
+  <!-- HOME -->
   <div id="page-home">
-    <!-- Banner Ad slot (admin injects script here) -->
-    <div class="banner-ad" id="banner-ad-slot">
-      <strong>📢 Advertisement</strong><br>
-      <span id="banner-ad-content">Ad loads here from Admin Panel</span>
-    </div>
-
-    <div class="section">
+    <div class="section" style="margin-top:16px;">
       <div class="section-title">⚡ Quick Earn</div>
       <div class="task-grid">
-        <div class="task-card" onclick="showPage('ads')">
-          <div class="task-badge">🔥</div>
-          <div class="task-icon">📢</div>
-          <div class="task-name">Watch Ads</div>
-          <div class="task-reward">+2 TCoin each</div>
-        </div>
-        <div class="task-card" onclick="showPage('videos')">
-          <div class="task-badge">10/day</div>
-          <div class="task-icon">🎬</div>
-          <div class="task-name">Watch Videos</div>
-          <div class="task-reward">+1 TCoin each</div>
-        </div>
-        <div class="task-card" onclick="showPage('web')">
-          <div class="task-icon">🌐</div>
-          <div class="task-name">Web Tasks</div>
-          <div class="task-reward">+2 TCoin each</div>
-        </div>
-        <div class="task-card" onclick="showPage('channels')">
-          <div class="task-icon">📺</div>
-          <div class="task-name">Join Channels</div>
-          <div class="task-reward">+1 TCoin each</div>
-        </div>
+        <div class="task-card" id="go-ads"><div class="task-badge">🔥</div><div class="task-icon">📢</div><div class="task-name">Watch Ads</div><div class="task-reward">+2 TCoin each</div></div>
+        <div class="task-card" id="go-videos"><div class="task-badge">10/day</div><div class="task-icon">🎬</div><div class="task-name">Watch Videos</div><div class="task-reward">+1 TCoin each</div></div>
+        <div class="task-card" id="go-web"><div class="task-icon">🌐</div><div class="task-name">Web Tasks</div><div class="task-reward">+2 TCoin each</div></div>
+        <div class="task-card" id="go-channels"><div class="task-icon">📺</div><div class="task-name">Join Channels</div><div class="task-reward">+1 TCoin each</div></div>
       </div>
     </div>
-
     <div class="section" style="margin-top:16px;">
       <div class="section-title">👥 Referral</div>
       <div class="referral-box">
@@ -256,7 +225,7 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
         <div class="ref-desc">Your friend earns, you earn. Forever.</div>
         <div class="ref-link-box">
           <div class="ref-link" id="ref-link-display">Loading...</div>
-          <button class="btn-copy" onclick="copyRef()">Copy</button>
+          <button class="btn-copy" id="copy-ref-btn">Copy</button>
         </div>
         <div class="ref-stats">
           <div class="ref-stat"><div class="ref-stat-val" id="ref-count">0</div><div class="ref-stat-label">Referrals</div></div>
@@ -264,16 +233,15 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
         </div>
       </div>
     </div>
-
-    <div class="section" style="margin-top:0;padding-bottom:16px;">
+    <div class="section" style="padding-bottom:16px;">
       <div class="section-title">💬 Support</div>
-      <button class="btn-gold" onclick="alert('Contact: support@tcoin.app')">📩 Contact Support</button>
+      <button class="btn-gold" id="support-btn">📩 Contact Support</button>
     </div>
   </div>
 
   <!-- ADS PAGE -->
   <div id="page-ads" style="display:none">
-    <div class="section" style="margin-top:16px;">
+    <div class="section" style="margin-top:16px;padding-bottom:16px;">
       <div class="section-title">📢 Ad Tasks</div>
       <div id="ads-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading ads...</p></div></div>
     </div>
@@ -281,15 +249,15 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 
   <!-- VIDEOS PAGE -->
   <div id="page-videos" style="display:none">
-    <div class="section" style="margin-top:16px;">
+    <div class="section" style="margin-top:16px;padding-bottom:16px;">
       <div class="section-title">🎬 Videos <span style="font-size:.75rem;color:var(--muted);font-family:'DM Sans'">(<span id="videos-watched">0</span>/10 today)</span></div>
-      <div id="video-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading videos...</p></div></div>
+      <div id="video-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div></div>
     </div>
   </div>
 
   <!-- WEB TASKS PAGE -->
   <div id="page-web" style="display:none">
-    <div class="section" style="margin-top:16px;">
+    <div class="section" style="margin-top:16px;padding-bottom:16px;">
       <div class="section-title">🌐 Web Tasks</div>
       <div id="web-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading tasks...</p></div></div>
     </div>
@@ -297,7 +265,7 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 
   <!-- CHANNELS PAGE -->
   <div id="page-channels" style="display:none">
-    <div class="section" style="margin-top:16px;">
+    <div class="section" style="margin-top:16px;padding-bottom:16px;">
       <div class="section-title">📺 Channels to Join</div>
       <div id="channel-list"><div class="empty-state"><div class="e-icon">⏳</div><p>Loading channels...</p></div></div>
     </div>
@@ -305,15 +273,13 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
 
   <!-- WALLET PAGE -->
   <div id="page-wallet" style="display:none">
-    <div class="section" style="margin-top:16px;">
+    <div class="section" style="margin-top:16px;padding-bottom:16px;">
       <div class="section-title">💰 My Wallet</div>
       <div class="wallet-card">
         <div class="wallet-label">Total Balance</div>
         <div class="wallet-balance" id="wallet-balance">0 <span style="font-size:1.2rem">T</span></div>
         <div class="wallet-usd">≈ $<span id="wallet-usd">0.00</span> USD</div>
-        <div class="wallet-actions">
-          <button class="btn-withdraw" onclick="openWithdraw()">💸 Withdraw</button>
-        </div>
+        <div class="wallet-actions"><button class="btn-withdraw" id="open-withdraw-btn">💸 Withdraw</button></div>
       </div>
       <div class="section-title">📋 History</div>
       <div id="history-list"><div class="empty-state"><div class="e-icon">📭</div><p>No transactions yet</p></div></div>
@@ -325,30 +291,30 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
     <div class="profile-header">
       <div class="profile-avatar" id="profile-avatar">U</div>
       <div class="profile-name" id="profile-name">User</div>
-      <div class="profile-email" id="profile-email">email</div>
+      <div class="profile-email" id="profile-email"></div>
     </div>
     <div class="profile-stats">
       <div class="p-stat"><div class="p-stat-val" id="p-balance">0</div><div class="p-stat-label">Balance</div></div>
       <div class="p-stat"><div class="p-stat-val" id="p-earned">0</div><div class="p-stat-label">Total Earned</div></div>
-      <div class="p-stat"><div class="p-stat-val" id="p-refs">0</div><div class="p-stat-label">Referrals</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="p-refs">—</div><div class="p-stat-label">Referrals</div></div>
     </div>
-    <button class="btn-logout" onclick="doLogout()">🚪 Logout</button>
+    <button class="btn-logout" id="logout-btn">🚪 Logout</button>
   </div>
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav" id="bottom-nav" style="display:none">
-  <button class="nav-item active" onclick="showPage('home')" id="nav-home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
-  <button class="nav-item" onclick="showPage('ads')" id="nav-ads"><span class="nav-icon">📢</span><span class="nav-label">Ads</span></button>
-  <button class="nav-item" onclick="showPage('videos')" id="nav-videos"><span class="nav-icon">🎬</span><span class="nav-label">Videos</span></button>
-  <button class="nav-item" onclick="showPage('web')" id="nav-web"><span class="nav-icon">🌐</span><span class="nav-label">Web</span></button>
-  <button class="nav-item" onclick="showPage('wallet')" id="nav-wallet"><span class="nav-icon">💳</span><span class="nav-label">Wallet</span></button>
+  <button class="nav-item active" id="nav-home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+  <button class="nav-item" id="nav-ads"><span class="nav-icon">📢</span><span class="nav-label">Ads</span></button>
+  <button class="nav-item" id="nav-videos"><span class="nav-icon">🎬</span><span class="nav-label">Videos</span></button>
+  <button class="nav-item" id="nav-web"><span class="nav-icon">🌐</span><span class="nav-label">Web</span></button>
+  <button class="nav-item" id="nav-wallet"><span class="nav-icon">💳</span><span class="nav-label">Wallet</span></button>
 </div>
 
 <!-- WITHDRAW MODAL -->
 <div class="modal-overlay" id="withdraw-modal">
   <div class="modal">
-    <div class="modal-title">💸 Withdraw Funds <button class="modal-close" onclick="closeWithdraw()">✕</button></div>
+    <div class="modal-title">💸 Withdraw Funds <button class="modal-close" id="close-withdraw-btn">✕</button></div>
     <div class="form-group"><label>Amount ($)</label>
       <select id="w-amount">
         <option value="5">$5 (5,000 TCoin)</option>
@@ -366,28 +332,23 @@ select{width:100%;padding:11px 14px;background:var(--dark3);border:1px solid var
     </div>
     <div class="form-group"><label>Account Number / Email</label><input type="text" id="w-number" placeholder="bKash: 01xxxxxxxx"></div>
     <div id="w-error" style="color:var(--red);font-size:.82rem;margin-bottom:10px;min-height:16px;"></div>
-    <button class="btn-gold" onclick="submitWithdraw()">Submit Request</button>
+    <button class="btn-gold" id="submit-withdraw-btn">Submit Request</button>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
-<!-- ═══════════════════════════════════════════
-     FIREBASE SDK
-     ─ Paste your firebaseConfig below (already done)
-     ═══════════════════════════════════════════ -->
-<script type="module">
-// ── CHANGE: Replace with your Firebase config if needed ──
-// Current config is already set from your project
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection,
-  query, where, onSnapshot, getDocs, orderBy, increment, serverTimestamp, limit }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<!-- ════════════════════════════════════════════
+     FIREBASE COMPAT SDK — no module, works on Vercel
+     ════════════════════════════════════════════ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
-// ── YOUR FIREBASE CONFIG (already filled in) ──
+<script>
+// ════════════════════════════════════════════
+// YOUR FIREBASE CONFIG — already filled in
+// ════════════════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyAwEJXhlSz_2PPORwQcsqcOGTmZuUC4UZ8",
   authDomain: "tcoin-3d985.firebaseapp.com",
@@ -398,366 +359,472 @@ const firebaseConfig = {
   appId: "1:599645098741:web:2dc7d49cfc40ce49a52bbc",
   measurementId: "G-5S3R9EP31T"
 };
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db   = firebase.firestore();
 
 // ── State ──
 let currentUser = null;
-let userData = null;
+let userData    = null;
 let todayVideoCount = 0;
 const TODAY = new Date().toDateString();
 
-// ── HELPERS ──
-window.showToast = (msg, type='info') => {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.className = `toast show ${type}`;
-  setTimeout(() => t.className = 'toast', 2800);
-};
+function el(id){ return document.getElementById(id); }
 
-function setError(msg) { document.getElementById('error-msg').textContent = msg; }
+// ════════════ TOAST ════════════
+function showToast(msg, type='info'){
+  const t = el('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(()=>{ t.className=''; }, 2800);
+}
 
-// ── TABS (auth screen) ──
-window.switchTab = (tab) => {
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
-  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
-  document.getElementById('register-form').style.display = tab==='register'?'block':'none';
-  setError('');
-};
+// ════════════ AUTH TABS ════════════
+el('tab-login').addEventListener('click', ()=>{
+  el('tab-login').classList.add('active'); el('tab-register').classList.remove('active');
+  el('login-form').style.display='block'; el('register-form').style.display='none';
+  el('error-msg').textContent='';
+});
+el('tab-register').addEventListener('click', ()=>{
+  el('tab-register').classList.add('active'); el('tab-login').classList.remove('active');
+  el('register-form').style.display='block'; el('login-form').style.display='none';
+  el('error-msg').textContent='';
+});
 
-// ── GENERATE REFERRAL CODE ──
-function genRefCode(len=6){ return Math.random().toString(36).toUpperCase().slice(2,2+len); }
+// ════════════ LOGIN ════════════
+el('do-login-btn').addEventListener('click', async ()=>{
+  const email = el('login-email').value.trim();
+  const pass  = el('login-pass').value;
+  el('error-msg').textContent='';
+  if(!email||!pass){ el('error-msg').textContent='Enter email & password'; return; }
+  try { await auth.signInWithEmailAndPassword(email, pass); }
+  catch(e){ el('error-msg').textContent='Invalid credentials'; }
+});
 
-// ── REGISTER ──
-window.doRegister = async () => {
-  const name = document.getElementById('reg-name').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const pass = document.getElementById('reg-pass').value;
-  const refCode = document.getElementById('reg-ref').value.trim().toUpperCase();
-  if(!name||!email||!pass){ setError('All fields required'); return; }
-  if(pass.length<6){ setError('Password min 6 chars'); return; }
+// ════════════ REGISTER ════════════
+function genRefCode(){ return Math.random().toString(36).toUpperCase().slice(2,8); }
+
+el('do-register-btn').addEventListener('click', async ()=>{
+  const name    = el('reg-name').value.trim();
+  const email   = el('reg-email').value.trim();
+  const pass    = el('reg-pass').value;
+  const refCode = el('reg-ref').value.trim().toUpperCase();
+  el('error-msg').textContent='';
+  if(!name||!email||!pass){ el('error-msg').textContent='All fields required'; return; }
+  if(pass.length<6){ el('error-msg').textContent='Password min 6 chars'; return; }
   try {
-    const cred = await createUserWithEmailAndPassword(auth, email, pass);
-    const uid = cred.user.uid;
+    const cred = await auth.createUserWithEmailAndPassword(email, pass);
+    const uid  = cred.user.uid;
     let referredByUid = null;
     if(refCode){
-      // ── Find who owns this referral code ──
-      const q = query(collection(db,'users'), where('referralCode','==',refCode), limit(1));
-      const snap = await getDocs(q);
+      const snap = await db.collection('users').where('referralCode','==',refCode).limit(1).get();
       if(!snap.empty) referredByUid = snap.docs[0].id;
     }
-    const myCode = genRefCode();
-    // ── Save user doc to Firestore /users/{uid} ──
-    await setDoc(doc(db,'users',uid),{
+    await db.collection('users').doc(uid).set({
       uid, name, email,
-      balance: 0,
-      totalEarned: 0,
-      referralCode: myCode,
+      balance: 0, totalEarned: 0,
+      referralCode: genRefCode(),
       referredBy: referredByUid || null,
-      withdrawCount: 0,
-      lastWithdrawDate: null,
-      joinedAt: serverTimestamp()
+      withdrawCount: 0, lastWithdrawDate: null,
+      joinedAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     showToast('Account created! Welcome 🎉','success');
-  } catch(e){ setError(e.message); }
-};
+  } catch(e){ el('error-msg').textContent = e.message; }
+});
 
-// ── LOGIN ──
-window.doLogin = async () => {
-  const email = document.getElementById('login-email').value.trim();
-  const pass = document.getElementById('login-pass').value;
-  if(!email||!pass){ setError('Enter email & password'); return; }
-  try {
-    await signInWithEmailAndPassword(auth, email, pass);
-  } catch(e){ setError('Invalid credentials'); }
-};
+// ════════════ LOGOUT ════════════
+el('logout-btn').addEventListener('click', ()=> auth.signOut());
 
-// ── LOGOUT ──
-window.doLogout = async () => { await signOut(auth); };
-
-// ── AUTH STATE ──
-onAuthStateChanged(auth, async (user) => {
+// ════════════ AUTH STATE ════════════
+auth.onAuthStateChanged(async (user)=>{
   if(user){
     currentUser = user;
     await loadUserData();
-    document.getElementById('auth-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    document.getElementById('bottom-nav').style.display = 'flex';
-    loadPageData('home');
+    el('auth-screen').style.display = 'none';
+    el('app').style.display         = 'block';
+    el('bottom-nav').style.display  = 'flex';
+    showPage('home');
   } else {
     currentUser = null; userData = null;
-    document.getElementById('auth-screen').style.display = 'flex';
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('bottom-nav').style.display = 'none';
+    el('auth-screen').style.display = 'flex';
+    el('app').style.display         = 'none';
+    el('bottom-nav').style.display  = 'none';
   }
 });
 
-// ── LOAD USER DATA (realtime) ──
+// ════════════ LOAD USER DATA (realtime) ════════════
 async function loadUserData(){
-  const ref = doc(db,'users',currentUser.uid);
-  onSnapshot(ref, snap => {
-    if(!snap.exists()) return;
+  db.collection('users').doc(currentUser.uid).onSnapshot(snap=>{
+    if(!snap.exists) return;
     userData = snap.data();
-    // Update UI
-    document.getElementById('header-balance').textContent = userData.balance || 0;
-    document.getElementById('wallet-balance').textContent = (userData.balance||0)+' T';
-    document.getElementById('wallet-usd').textContent = ((userData.balance||0)/1000).toFixed(2);
-    document.getElementById('p-balance').textContent = userData.balance || 0;
-    document.getElementById('p-earned').textContent = userData.totalEarned || 0;
-    document.getElementById('p-refs').textContent = '—';
-    document.getElementById('profile-name').textContent = userData.name || 'User';
-    document.getElementById('profile-email').textContent = userData.email || '';
-    document.getElementById('profile-avatar').textContent = (userData.name||'U')[0].toUpperCase();
-    document.getElementById('avatar-btn').textContent = (userData.name||'U')[0].toUpperCase();
-    // Referral
-    const refLink = `${location.origin}${location.pathname}?ref=${userData.referralCode}`;
-    document.getElementById('ref-link-display').textContent = refLink;
+    el('header-balance').textContent = userData.balance || 0;
+    el('wallet-balance').textContent = (userData.balance||0)+' T';
+    el('wallet-usd').textContent     = ((userData.balance||0)/1000).toFixed(2);
+    el('p-balance').textContent      = userData.balance  || 0;
+    el('p-earned').textContent       = userData.totalEarned || 0;
+    el('profile-name').textContent   = userData.name  || 'User';
+    el('profile-email').textContent  = userData.email || '';
+    const initials = (userData.name||'U')[0].toUpperCase();
+    el('profile-avatar').textContent = initials;
+    el('avatar-btn').textContent     = initials;
+    const refLink = location.origin + location.pathname + '?ref=' + (userData.referralCode||'');
+    el('ref-link-display').textContent = refLink;
   });
-  // Load today's video watch count
-  // ── /users/{uid}/videoProgress/{today} stores count ──
-  const vpRef = doc(db,'users',currentUser.uid,'videoProgress',TODAY);
-  const vpSnap = await getDoc(vpRef);
-  todayVideoCount = vpSnap.exists() ? (vpSnap.data().count||0) : 0;
-  document.getElementById('videos-watched').textContent = todayVideoCount;
+  // Today video count
+  const vpSnap = await db.collection('users').doc(currentUser.uid)
+    .collection('videoProgress').doc(TODAY).get();
+  todayVideoCount = vpSnap.exists ? (vpSnap.data().count||0) : 0;
+  el('videos-watched').textContent = todayVideoCount;
 }
 
-// ── ADD COINS ──
+// ════════════ ADD COINS ════════════
 async function addCoins(amount, label){
   if(!currentUser) return;
-  const ref = doc(db,'users',currentUser.uid);
-  await updateDoc(ref,{ balance: increment(amount), totalEarned: increment(amount) });
-  // ── Add to history collection ──
-  await addDoc(collection(db,'users',currentUser.uid,'history'),{
-    type: label, amount, createdAt: serverTimestamp()
+  await db.collection('users').doc(currentUser.uid).update({
+    balance:      firebase.firestore.FieldValue.increment(amount),
+    totalEarned:  firebase.firestore.FieldValue.increment(amount)
   });
-  // ── Referral commission ──
-  if(userData?.referredBy){
-    await updateDoc(doc(db,'users',userData.referredBy),{
-      balance: increment(Math.floor(amount*0.1)),
-      totalEarned: increment(Math.floor(amount*0.1))
-    });
+  await db.collection('users').doc(currentUser.uid).collection('history').add({
+    type: label, amount, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+  // Referral commission (10%)
+  if(userData && userData.referredBy){
+    const comm = Math.floor(amount * 0.1);
+    if(comm > 0){
+      await db.collection('users').doc(userData.referredBy).update({
+        balance:     firebase.firestore.FieldValue.increment(comm),
+        totalEarned: firebase.firestore.FieldValue.increment(comm)
+      });
+    }
   }
-  showToast(`+${amount} TCoin earned! 🟡`,'success');
+  showToast('+'+amount+' TCoin earned! 🟡','success');
 }
 
-// ── NAVIGATION ──
-window.showPage = (page) => {
-  ['home','ads','videos','web','channels','wallet','profile'].forEach(p=>{
-    document.getElementById('page-'+p).style.display = p===page?'block':'none';
+// ════════════ NAVIGATION ════════════
+const PAGES = ['home','ads','videos','web','channels','wallet','profile'];
+
+function showPage(page){
+  PAGES.forEach(p=>{
+    el('page-'+p).style.display = (p===page)?'block':'none';
   });
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const nv = document.getElementById('nav-'+page);
-  if(nv) nv.classList.add('active');
-  loadPageData(page);
-};
-
-window.loadPageData = (page) => {
-  if(page==='videos') loadVideos();
-  if(page==='ads') loadAds();
-  if(page==='web') loadWebTasks();
+  if(el('nav-'+page)) el('nav-'+page).classList.add('active');
+  if(page==='ads')      loadAds();
+  if(page==='videos')   loadVideos();
+  if(page==='web')      loadWebTasks();
   if(page==='channels') loadChannels();
-  if(page==='wallet') loadHistory();
-};
-
-// ── LOAD VIDEOS ──
-async function loadVideos(){
-  const list = document.getElementById('video-list');
-  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
-  // ── Read from Firestore /videos collection ──
-  const q = query(collection(db,'videos'));
-  const snap = await getDocs(q);
-  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🎬</div><p>No videos yet</p></div>'; return; }
-  let html='';
-  snap.forEach(d=>{
-    const v=d.data();
-    html+=`<div class="video-item ${todayVideoCount>=10?'watched':''}" onclick="watchVideo('${d.id}','${v.url||''}',${v.reward||1})">
-      <div class="video-thumb">▶️</div>
-      <div class="video-info"><div class="video-title">${v.title||'Video'}</div><div class="video-meta">${v.reward||1} TCoin reward</div></div>
-      <div class="video-earn">+${v.reward||1}T</div>
-    </div>`;
-  });
-  list.innerHTML = html;
+  if(page==='wallet')   loadHistory();
 }
 
-window.watchVideo = async (vid, url, reward) => {
+// Nav button events
+el('nav-home').addEventListener('click',    ()=>showPage('home'));
+el('nav-ads').addEventListener('click',     ()=>showPage('ads'));
+el('nav-videos').addEventListener('click',  ()=>showPage('videos'));
+el('nav-web').addEventListener('click',     ()=>showPage('web'));
+el('nav-wallet').addEventListener('click',  ()=>showPage('wallet'));
+el('avatar-btn').addEventListener('click',  ()=>showPage('profile'));
+el('go-ads').addEventListener('click',      ()=>showPage('ads'));
+el('go-videos').addEventListener('click',   ()=>showPage('videos'));
+el('go-web').addEventListener('click',      ()=>showPage('web'));
+el('go-channels').addEventListener('click', ()=>showPage('channels'));
+el('support-btn').addEventListener('click', ()=>alert('Contact: support@tcoin.app'));
+el('copy-ref-btn').addEventListener('click',()=>{
+  navigator.clipboard.writeText(el('ref-link-display').textContent)
+    .then(()=>showToast('Referral link copied! 🔗','success'));
+});
+
+// ════════════════════════════════════════════════════════
+// ADS — Supports TWO types:
+//   1. "link"   → show as a clickable card with Visit button
+//   2. "script" → inject raw Monetag/Adsterra HTML/script
+// ════════════════════════════════════════════════════════
+async function loadAds(){
+  const list = el('ads-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading ads...</p></div>';
+  try {
+    const snap = await db.collection('ads').get();
+    if(snap.empty){
+      list.innerHTML='<div class="empty-state"><div class="e-icon">📢</div><p>No ads yet. Check back later!</p></div>';
+      return;
+    }
+    list.innerHTML = ''; // clear
+
+    snap.forEach(d=>{
+      const a   = d.data();
+      const adId = d.id;
+      const reward = a.reward || 2;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ad-item';
+
+      // ── Header ──
+      wrapper.innerHTML = `
+        <div class="ad-item-header">
+          <div class="ad-item-title">📢 ${a.title || 'Ad Task'}</div>
+          <div class="ad-reward-badge">+${reward} TCoin</div>
+        </div>
+      `;
+
+      // ── TYPE: link ── Show a clickable Visit button card
+      if(a.adType === 'link' && a.adLink){
+        const linkCard = document.createElement('div');
+        linkCard.className = 'ad-link-card';
+        linkCard.innerHTML = `
+          <div class="ad-link-icon">🌐</div>
+          <div class="ad-link-info">
+            <div class="ad-link-title">${a.title || 'Visit & Earn'}</div>
+            <div class="ad-link-url">${a.adLink}</div>
+          </div>
+          <button class="btn-visit-ad" id="btn-ad-${adId}">Visit</button>
+        `;
+        wrapper.appendChild(linkCard);
+        const note = document.createElement('div');
+        note.className = 'ad-earn-note';
+        note.textContent = 'Visit the site → come back → earn TCoin';
+        wrapper.appendChild(note);
+
+        // Click handler — open link, wait 8s, then credit
+        linkCard.querySelector('.btn-visit-ad').addEventListener('click', function(){
+          window.open(a.adLink, '_blank');
+          this.disabled = true;
+          this.textContent = '⏳ 8s...';
+          let secs = 8;
+          const iv = setInterval(()=>{
+            secs--;
+            this.textContent = '⏳ '+secs+'s...';
+            if(secs<=0){
+              clearInterval(iv);
+              addCoins(reward, 'Ads Click');
+              this.textContent = '✓ Earned!';
+              this.style.background = 'var(--green)';
+            }
+          },1000);
+        });
+
+      // ── TYPE: script ── Inject raw Monetag/Adsterra/OnClicka HTML
+      } else if(a.adType === 'script' && a.script){
+        const scriptArea = document.createElement('div');
+        scriptArea.className = 'ad-script-area';
+        // Safely inject the script/HTML
+        scriptArea.innerHTML = a.script;
+        // Execute any <script> tags inside
+        scriptArea.querySelectorAll('script').forEach(oldScript=>{
+          const newScript = document.createElement('script');
+          Array.from(oldScript.attributes).forEach(attr=> newScript.setAttribute(attr.name, attr.value));
+          newScript.textContent = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+        wrapper.appendChild(scriptArea);
+
+        // Earn button after viewing
+        const earnBtn = document.createElement('button');
+        earnBtn.className = 'btn-gold';
+        earnBtn.style.cssText = 'margin-top:10px;font-size:.85rem;padding:10px;';
+        earnBtn.textContent = '✓ I watched the ad — Claim '+reward+' TCoin';
+        earnBtn.addEventListener('click', function(){
+          this.disabled = true;
+          this.textContent = '✓ Claimed!';
+          addCoins(reward, 'Ads Click');
+        });
+        wrapper.appendChild(earnBtn);
+
+      // ── FALLBACK ── if no type set
+      } else {
+        wrapper.innerHTML += '<div class="ad-earn-note" style="padding:12px;color:var(--muted);">Ad not configured properly. Contact admin.</div>';
+      }
+
+      list.appendChild(wrapper);
+    });
+
+  } catch(e){
+    list.innerHTML='<div class="empty-state"><div class="e-icon">⚠️</div><p>Error loading ads</p></div>';
+    console.error(e);
+  }
+}
+
+// ════════════ VIDEOS ════════════
+async function loadVideos(){
+  const list = el('video-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  try {
+    const snap = await db.collection('videos').get();
+    if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🎬</div><p>No videos yet</p></div>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d=>{
+      const v = d.data();
+      const div = document.createElement('div');
+      div.className = 'video-item' + (todayVideoCount>=10?' watched':'');
+      div.innerHTML = `
+        <div class="video-thumb">▶️</div>
+        <div class="video-info">
+          <div class="video-title">${v.title||'Video'}</div>
+          <div class="video-meta">+${v.reward||1} TCoin reward</div>
+        </div>
+        <div class="video-earn">+${v.reward||1}T</div>
+      `;
+      div.addEventListener('click', ()=> watchVideo(d.id, v.url||'', v.reward||1));
+      list.appendChild(div);
+    });
+  } catch(e){ list.innerHTML='<div class="empty-state"><div class="e-icon">⚠️</div><p>Error loading</p></div>'; }
+}
+
+async function watchVideo(vid, url, reward){
   if(todayVideoCount>=10){ showToast('Daily video limit reached (10/day)','error'); return; }
   if(url) window.open(url,'_blank');
-  // Wait 15s then credit (simulate watch)
   showToast('Watch the video... coins in 15s ⏳','info');
   setTimeout(async()=>{
     todayVideoCount++;
-    document.getElementById('videos-watched').textContent = todayVideoCount;
-    // ── Update /users/{uid}/videoProgress/{today} ──
-    const vpRef = doc(db,'users',currentUser.uid,'videoProgress',TODAY);
-    await setDoc(vpRef,{ count: todayVideoCount },{ merge: true });
+    el('videos-watched').textContent = todayVideoCount;
+    await db.collection('users').doc(currentUser.uid)
+      .collection('videoProgress').doc(TODAY)
+      .set({ count: todayVideoCount },{ merge: true });
     await addCoins(reward,'Video Watch');
-    await loadVideos();
-  },15000);
-};
-
-// ── LOAD ADS ──
-async function loadAds(){
-  const list = document.getElementById('ads-list');
-  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
-  // ── Read from Firestore /ads collection ──
-  const snap = await getDocs(collection(db,'ads'));
-  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📢</div><p>No ads tasks yet</p></div>'; return; }
-  let html='';
-  snap.forEach(d=>{
-    const a=d.data();
-    // Inject ad script into banner slot if banner type
-    if(a.type==='banner'&&a.script){
-      document.getElementById('banner-ad-content').innerHTML = a.script;
-    }
-    html+=`<div class="task-card" style="width:100%;margin-bottom:10px;" onclick="watchAd('${d.id}',${a.reward||2})">
-      <div class="task-icon">📢</div>
-      <div class="task-name">${a.type||'Ad'} Task</div>
-      <div class="task-reward">+${a.reward||2} TCoin — Click to view</div>
-      <div style="font-size:.72rem;color:var(--muted);margin-top:4px;">Type: ${a.type||'popup'}</div>
-    </div>`;
-  });
-  list.innerHTML = html;
+    loadVideos();
+  }, 15000);
 }
 
-window.watchAd = async (adId, reward) => {
-  showToast('Ad opened — come back in 10s ⏳','info');
-  setTimeout(async()=>{ await addCoins(reward,'Ads Click'); },10000);
-};
-
-// ── LOAD WEB TASKS ──
+// ════════════ WEB TASKS ════════════
 async function loadWebTasks(){
-  const list = document.getElementById('web-list');
+  const list = el('web-list');
   list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
-  // ── Read from Firestore /webTasks collection ──
-  const snap = await getDocs(collection(db,'webTasks'));
-  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🌐</div><p>No web tasks yet</p></div>'; return; }
-  let html='';
-  snap.forEach(d=>{
-    const w=d.data();
-    html+=`<div class="web-item">
-      <div class="web-icon">🌐</div>
-      <div class="web-info"><div class="web-title">Visit & Earn</div><div class="web-url">${w.url||'#'}</div></div>
-      <button class="btn-visit" onclick="doWebTask('${d.id}','${w.url||'#'}',${w.reward||2})">+${w.reward||2}T</button>
-    </div>`;
-  });
-  list.innerHTML = html;
+  try {
+    const snap = await db.collection('webTasks').get();
+    if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">🌐</div><p>No web tasks yet</p></div>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d=>{
+      const w = d.data();
+      const div = document.createElement('div');
+      div.className = 'web-item';
+      div.innerHTML = `
+        <div class="web-icon">🌐</div>
+        <div class="web-info">
+          <div class="web-title">Visit & Earn</div>
+          <div class="web-url">${w.url||'#'}</div>
+        </div>
+        <button class="btn-visit">+${w.reward||2}T</button>
+      `;
+      div.querySelector('.btn-visit').addEventListener('click', function(){
+        window.open(w.url,'_blank');
+        this.disabled = true; this.textContent = '⏳ 8s';
+        let s=8;
+        const iv=setInterval(()=>{
+          s--; this.textContent='⏳ '+s+'s';
+          if(s<=0){ clearInterval(iv); addCoins(w.reward||2,'Web Task'); this.textContent='✓ Done'; }
+        },1000);
+      });
+      list.appendChild(div);
+    });
+  } catch(e){ list.innerHTML='<div class="empty-state"><div class="e-icon">⚠️</div><p>Error loading</p></div>'; }
 }
 
-window.doWebTask = async (id, url, reward) => {
-  if(url) window.open(url,'_blank');
-  showToast('Visiting site... earn in 8s ⏳','info');
-  setTimeout(async()=>{ await addCoins(reward,'Web Task'); },8000);
-};
-
-// ── LOAD CHANNELS ──
+// ════════════ CHANNELS ════════════
 async function loadChannels(){
-  const list = document.getElementById('channel-list');
+  const list = el('channel-list');
   list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
-  // ── Read joined channels from user sub-collection ──
-  const joinedSnap = await getDocs(collection(db,'users',currentUser.uid,'joinedChannels'));
-  const joinedIds = new Set(joinedSnap.docs.map(d=>d.id));
-  // ── Read from Firestore /channels collection ──
-  const snap = await getDocs(collection(db,'channels'));
-  if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📺</div><p>No channels yet</p></div>'; return; }
-  let html='';
-  snap.forEach(d=>{
-    const c=d.data();
-    const joined = joinedIds.has(d.id);
-    html+=`<div class="channel-item">
-      <div class="ch-icon">▶</div>
-      <div class="ch-info"><div class="ch-name">${c.name||'Channel'}</div><div class="ch-reward">+${c.reward||1} TCoin</div></div>
-      <button class="btn-join ${joined?'joined':''}" onclick="joinChannel('${d.id}','${c.url||'#'}',${c.reward||1})">${joined?'✓ Joined':'Join'}</button>
-    </div>`;
-  });
-  list.innerHTML = html;
+  try {
+    const joinedSnap = await db.collection('users').doc(currentUser.uid).collection('joinedChannels').get();
+    const joinedIds  = new Set(joinedSnap.docs.map(d=>d.id));
+    const snap = await db.collection('channels').get();
+    if(snap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📺</div><p>No channels yet</p></div>'; return; }
+    list.innerHTML = '';
+    snap.forEach(d=>{
+      const c = d.data(); const joined = joinedIds.has(d.id);
+      const div = document.createElement('div');
+      div.className = 'channel-item';
+      div.innerHTML = `
+        <div class="ch-icon">▶</div>
+        <div class="ch-info">
+          <div class="ch-name">${c.name||'Channel'}</div>
+          <div class="ch-reward">+${c.reward||1} TCoin</div>
+        </div>
+        <button class="btn-join ${joined?'joined':''}">${joined?'✓ Joined':'Join'}</button>
+      `;
+      div.querySelector('.btn-join').addEventListener('click', async function(){
+        if(joined) return;
+        window.open(c.url||'#','_blank');
+        await db.collection('users').doc(currentUser.uid).collection('joinedChannels')
+          .doc(d.id).set({ joinedAt: firebase.firestore.FieldValue.serverTimestamp() });
+        await addCoins(c.reward||1,'Channel Join');
+        this.className='btn-join joined'; this.textContent='✓ Joined';
+      });
+      list.appendChild(div);
+    });
+  } catch(e){ list.innerHTML='<div class="empty-state"><div class="e-icon">⚠️</div><p>Error loading</p></div>'; }
 }
 
-window.joinChannel = async (id, url, reward) => {
-  if(url) window.open(url,'_blank');
-  // ── Save joined record in /users/{uid}/joinedChannels/{channelId} ──
-  await setDoc(doc(db,'users',currentUser.uid,'joinedChannels',id),{ joinedAt: serverTimestamp() });
-  await addCoins(reward,'Channel Join');
-  await loadChannels();
-};
-
-// ── LOAD HISTORY ──
+// ════════════ HISTORY ════════════
 async function loadHistory(){
-  const list = document.getElementById('history-list');
-  // ── Read from /users/{uid}/history and /withdraw ──
-  const hSnap = await getDocs(query(collection(db,'users',currentUser.uid,'history'), orderBy('createdAt','desc')));
-  const wSnap = await getDocs(query(collection(db,'withdraw'), where('userId','==',currentUser.uid), orderBy('createdAt','desc')));
-  if(hSnap.empty && wSnap.empty){ list.innerHTML='<div class="empty-state"><div class="e-icon">📭</div><p>No transactions yet</p></div>'; return; }
-  let html='';
-  wSnap.forEach(d=>{
-    const w=d.data();
-    html+=`<div class="history-item">
-      <div class="hist-info"><div class="hist-type">💸 Withdraw – ${w.method}</div><div class="hist-date">${w.createdAt?.toDate?.()?.toLocaleDateString()||'—'}</div></div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-        <div class="hist-amount withdraw">-$${w.amount}</div>
-        <span class="hist-status ${w.status}">${w.status}</span>
-      </div>
-    </div>`;
-  });
-  hSnap.forEach(d=>{
-    const h=d.data();
-    html+=`<div class="history-item">
-      <div class="hist-info"><div class="hist-type">${h.type||'Earn'}</div><div class="hist-date">${h.createdAt?.toDate?.()?.toLocaleDateString()||'—'}</div></div>
-      <div class="hist-amount earned">+${h.amount}T</div>
-    </div>`;
-  });
-  list.innerHTML = html || '<div class="empty-state"><div class="e-icon">📭</div><p>No history</p></div>';
+  const list = el('history-list');
+  list.innerHTML = '<div class="empty-state"><div class="e-icon">⏳</div><p>Loading...</p></div>';
+  try {
+    const [hSnap, wSnap] = await Promise.all([
+      db.collection('users').doc(currentUser.uid).collection('history').orderBy('createdAt','desc').get(),
+      db.collection('withdraw').where('userId','==',currentUser.uid).orderBy('createdAt','desc').get()
+    ]);
+    if(hSnap.empty && wSnap.empty){
+      list.innerHTML='<div class="empty-state"><div class="e-icon">📭</div><p>No transactions yet</p></div>'; return;
+    }
+    list.innerHTML = '';
+    wSnap.forEach(d=>{
+      const w=d.data();
+      list.innerHTML+=`<div class="history-item">
+        <div><div class="hist-type">💸 Withdraw – ${w.method}</div><div class="hist-date">${w.createdAt?w.createdAt.toDate().toLocaleDateString():'—'}</div></div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+          <div class="hist-amount withdraw">-$${w.amount}</div>
+          <span class="hist-status ${w.status}">${w.status}</span>
+        </div>
+      </div>`;
+    });
+    hSnap.forEach(d=>{
+      const h=d.data();
+      list.innerHTML+=`<div class="history-item">
+        <div><div class="hist-type">${h.type||'Earn'}</div><div class="hist-date">${h.createdAt?h.createdAt.toDate().toLocaleDateString():'—'}</div></div>
+        <div class="hist-amount earned">+${h.amount}T</div>
+      </div>`;
+    });
+  } catch(e){ list.innerHTML='<div class="empty-state"><div class="e-icon">⚠️</div><p>Error loading history</p></div>'; }
 }
 
-// ── REFERRAL ──
-window.copyRef = () => {
-  const text = document.getElementById('ref-link-display').textContent;
-  navigator.clipboard.writeText(text).then(()=>showToast('Referral link copied! 🔗','success'));
-};
+// ════════════ WITHDRAW ════════════
+el('open-withdraw-btn').addEventListener('click', ()=>{
+  el('w-error').textContent='';
+  el('withdraw-modal').classList.add('open');
+});
+el('close-withdraw-btn').addEventListener('click', ()=> el('withdraw-modal').classList.remove('open'));
 
-// ── WITHDRAW ──
-window.openWithdraw = () => {
-  document.getElementById('w-error').textContent='';
-  document.getElementById('withdraw-modal').classList.add('open');
-};
-window.closeWithdraw = () => document.getElementById('withdraw-modal').classList.remove('open');
-
-window.submitWithdraw = async () => {
-  const amount = parseInt(document.getElementById('w-amount').value);
-  const method = document.getElementById('w-method').value;
-  const number = document.getElementById('w-number').value.trim();
-  const errEl = document.getElementById('w-error');
+el('submit-withdraw-btn').addEventListener('click', async ()=>{
+  const amount = parseInt(el('w-amount').value);
+  const method = el('w-method').value;
+  const number = el('w-number').value.trim();
+  const errEl  = el('w-error');
   if(!number){ errEl.textContent='Enter account number/email'; return; }
   if(!userData){ return; }
   const coinsNeeded = amount * 1000;
-  if((userData.balance||0) < coinsNeeded){ errEl.textContent=`Need ${coinsNeeded} TCoin (you have ${userData.balance||0})`; return; }
-  // ── Daily limit: 2 withdrawals per day ──
+  if((userData.balance||0) < coinsNeeded){
+    errEl.textContent='Need '+coinsNeeded+' TCoin (you have '+(userData.balance||0)+')'; return;
+  }
   const todayStr = new Date().toDateString();
   if(userData.lastWithdrawDate===todayStr && (userData.withdrawCount||0)>=2){
     errEl.textContent='Daily withdraw limit reached (2/day)'; return;
   }
-  // ── Deduct coins and submit to /withdraw collection ──
-  await updateDoc(doc(db,'users',currentUser.uid),{
-    balance: increment(-coinsNeeded),
-    withdrawCount: (userData.lastWithdrawDate===todayStr) ? increment(1) : 1,
+  await db.collection('users').doc(currentUser.uid).update({
+    balance: firebase.firestore.FieldValue.increment(-coinsNeeded),
+    withdrawCount: (userData.lastWithdrawDate===todayStr) ? firebase.firestore.FieldValue.increment(1) : 1,
     lastWithdrawDate: todayStr
   });
-  // ── Save withdraw request to /withdraw collection ──
-  await addDoc(collection(db,'withdraw'),{
-    userId: currentUser.uid,
-    userName: userData.name,
-    amount, method, number,
-    status: 'pending',
-    createdAt: serverTimestamp()
+  await db.collection('withdraw').add({
+    userId: currentUser.uid, userName: userData.name,
+    amount, method, number, status:'pending',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
-  closeWithdraw();
+  el('withdraw-modal').classList.remove('open');
   showToast('Withdraw request submitted! ✅','success');
   loadHistory();
-};
+});
 
-// ── AUTO REF CODE ON URL ──
+// Auto-fill referral code from URL
 const urlRef = new URLSearchParams(location.search).get('ref');
-if(urlRef) document.getElementById('reg-ref').value = urlRef;
+if(urlRef){ const inp = el('reg-ref'); if(inp) inp.value = urlRef; }
 </script>
 </body>
 </html>
